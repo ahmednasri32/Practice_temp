@@ -1,5 +1,5 @@
 :root {
-  --brand-color:rgb(255, 33, 51);
+  --brand-color:rgb(33, 122, 255);
   --white-color:white;
   --dark-color:black;
   --bg-section:#eee;
@@ -16,6 +16,7 @@ html {
   scroll-behavior: smooth;
 }
 body {
+  padding-top: 80.688px;
   font-family: "Open Sans", sans-serif;
   background-color: var(--dark-color);
 }
@@ -120,10 +121,9 @@ header .social i.active
 /* end section header  */
 /* start section hero  */
 .hero {
-  margin-top: 80.688px;
   height:calc(100vh - 80.688px);
   position: relative;
-  background-image: url(/assets/image/landing.jpg);
+  background-image: url(assets/image/landing.jpg);
   background-size: cover;
 }
 @media (max-width: 767px) {
@@ -252,61 +252,67 @@ header .social i.active
   display: block;
 }
 /* end section about  */
-/* start section Testimonials */
-.Testimonials {
+/* start section testimonials */
+.testimonials {
   background-color: var(--bg-section) ;
   padding-top: 100px;
   padding-bottom: 100px;
   display: flex;
   align-items: center;
 } 
-.Testimonials .container h2 {
+.testimonials .container h2 {
   text-align: center;
   margin-bottom: 15px;
   font-size: 2rem;
 }
 @media (max-width: 767px) {
-  .Testimonials .container h2 {
+  .testimonials .container h2 {
       font-size: 1.8rem;
   }
 }
-.Testimonials .container .card {
+.testimonials .container .card {
   display: grid;
-  align-items: center;
+  align-items: stretch;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 15px;
 }
-.Testimonials .container .card .box {
+.testimonials .container .card .box {
   background-color: var(--white-color);
   padding: 20px;
   border-radius: 3px;
   box-shadow: 3px 3px 3px #ccc;
-  min-height: 100%;
+  transition: transform .3s, box-shadow .3s;
 }
-.Testimonials .box .client {
+.testimonials .box:hover {
+  transform: translateY(-5px);
+  box-shadow: 6px 6px 10px #bbb;
+  cursor: pointer;
+}
+.testimonials .box .client {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
 }
-.Testimonials .client .profile {
+.testimonials .client .profile {
   display: flex;
   align-items: center;
   gap: 5px;
 }
-.Testimonials .client .profile img {
+.testimonials .client .profile img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   display: block;
+  object-fit: cover;
 }
-.Testimonials .box .client i {
+.testimonials .box .client i {
   color:rgb(241, 209, 22);
 }
-.Testimonials .container .card .box p {
+.testimonials .container .card .box p {
   color: #7c7c7c;
 }
-/* end section Testimonials */
+/* end section testimonials */
 /* start footer  */
 footer {
   background-color: var(--brand-color);
