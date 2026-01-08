@@ -1,5 +1,6 @@
 {
   "editor.overtypeCursorStyle": "line",
   "editor.autoClosingOvertype": "auto",
-  "editor.overtypeOnPaste": true
+  "editor.overtypeOnPaste": true,
+  "cSpell.words": ["الضغط"]
 }

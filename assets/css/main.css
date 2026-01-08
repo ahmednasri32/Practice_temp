@@ -61,6 +61,14 @@ header .container {
   align-items: center;
   min-height: 80.688px;
 }
+header nav .toggle-menu {
+  display: none;
+}
+@media (max-width: 767px) {
+  header nav .toggle-menu {
+    display: block;
+  }
+}
 header .logo {
   color: var(--dark-color);
   font-size: 24px;
@@ -76,17 +84,26 @@ header .logo {
 header ul {
   display: flex;
   min-height: 80.688px;
-  align-items: center;
 }
 @media (max-width: 767px) {
   header ul {
-    display: none;
+    flex-direction: column;
+    position: absolute;
+    background-color:var(--brand-color);
+    right: 0;
+    left:0;
+    top: 80px;
+
+    max-height:0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
   }
 }
 header ul li a {
   text-decoration: none;
   padding: 29px 10px;
-  color: var(--dark-color);
+  color: var(--white-color);
   font-size: 18px;
   transition:0.3s;
   display: block;
@@ -94,8 +111,17 @@ header ul li a {
 }
 @media (max-width: 767px) {
   header ul li a {
-    padding: 29px 6px;
+    padding-left: 10px;
     font-size: 16px;
+    padding: 15px 10px;
+  }
+  header ul li a:hover {
+    padding-left:20px;
+  }
+  header ul.open {
+    display: flex;
+    max-height: 300px;
+    opacity: 1;
   }
 }
 header ul li a:hover,
@@ -110,7 +136,7 @@ header .social i {
 }
 @media (max-width: 767px) {
   header .social i {
-    font-size: 16px;
+    display: none;
   }
 }
 header .social i:hover,

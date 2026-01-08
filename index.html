@@ -17,21 +17,17 @@
       <div class="container">
         <div class="logo">Logo designer</div>
         <nav>
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">testimonials</a></li>
-            <li><a href="#">About</a></li>
+          <i class="fas fa-bars toggle-menu"></i>
+          <ul class="nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#testimonials">testimonials</a></li>
+            <li><a href="#about">About</a></li>
           </ul>
         </nav>
-        <div class="social">
-          <a href=""><i class="fa-brands fa-facebook"></i></a>
-          <a href=""><i class="fa-brands fa-whatsapp"></i></a>
-          <a href=""><i class="fa-brands fa-github"></i></a>
-        </div>
       </div>
   </header>
-  <section class="hero">
+  <section id="home" class="hero">
     <div class="overlay"></div>
     <div class="container">
       <div class="text">
@@ -43,7 +39,7 @@
   </section>
   <!-- end header -->
   <!-- start services -->
-  <section class="services">
+  <section id="services" class="services">
       <div class="service">
         <div class="container">
           <div class="srv">
@@ -66,7 +62,7 @@
   </section>
   <!-- end services -->
   <!-- start about -->
-  <section class="about">
+  <section id="about" class="about">
     <div class="container">
       <div class="text">
         <h3>About Us</h3>
@@ -80,7 +76,7 @@
   </section>
   <!-- end about -->
   <!-- start testimonials -->
-  <section class="testimonials">
+  <section id="testimonials" class="testimonials">
     <div class="container">
       <h2>What Our Clients Say</h2>
       <div class="card">
@@ -146,5 +142,6 @@
     </div>
   </footer>
   <!-- end footer  -->
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
