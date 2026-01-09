@@ -12,6 +12,16 @@ navLinks.forEach(link => {
 const toggleMenu = document.querySelector(".toggle-menu");
 const nav = document.querySelector(".nav-links");
 
-toggleMenu.addEventListener("click", () => {
+toggleMenu.addEventListener("click", (e) => {
+  e.stopPropagation(); // يمنع إغلاق القائمة فورًا
   nav.classList.toggle("open"); // تضيف class "show" لعرض القائمة
+});
+// يغلق القائمة عند الضغط خارجها
+document.addEventListener("click", (e) => {
+  if (
+    !e.target.closest(".navLinks") &&
+    !e.target.closest(".toggleMenu")
+    ) {
+    nav.classList.remove("open");
+  }
 });
