@@ -2,5 +2,8 @@
   "editor.overtypeCursorStyle": "line",
   "editor.autoClosingOvertype": "auto",
   "editor.overtypeOnPaste": true,
-  "cSpell.words": ["الضغط"]
+  "cSpell.words": [
+    "اختياري",
+    "الضغط"
+  ]
 }

@@ -1,5 +1,6 @@
 :root {
   --primary: #2563eb;
+  --secondary: #0f172a;
   --light: #f8fafc;
   --dark: #0f172a;
   --gray: #e6e6e6;
@@ -38,29 +39,24 @@ ul,li {
 }
 /* end reset  */
 /* component  */
-.btn--primary {
-  border: none;
-  padding: var(--btn-space);
-  border-radius: 3px;
-  cursor: pointer;
-  font-weight: 600;
-  background-color: var(--primary);
-  color: var(--light);
-}
-.btn--primary:nth-of-type(2) {
-  margin-left: 5px;
-}
 .btn {
   border: none;
   padding: var(--btn-space);
   border-radius: 3px;
   cursor: pointer;
   font-weight: 600;
-  background-color: var(--primary);
   color: var(--light);
   transition: .3s;
 }
-.btn:nth-of-type(2) {
+.btn--primary {
+  background-color: var(--primary);
+  color: var(--light);
+}
+.btn--secondary {
+  background-color: var(--secondary);
+  color: var(--light);
+}
+.btn--primary:nth-of-type(2) {
   margin-left: 5px;
 }
 .btn:hover {
@@ -201,7 +197,6 @@ header .social i.active
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 20px;
   background-image:image-set(
   url("../image/landing.jpg") type("image/jpeg")
   );
@@ -232,6 +227,11 @@ header .social i.active
   color: #fff;
   margin-bottom: 10px;
 }
+@media (max-width: 400px) {
+  .hero__title {
+    font-size: 1.5rem;
+  }
+}
 /* Description */
 .hero__desc {
   font-size: clamp(0.9rem, 2vw, 1rem);
@@ -243,6 +243,7 @@ header .social i.active
 @media (max-width: 767px) {
   .hero {
     min-height: 65vh;
+    text-align: center;
   }
 }
 
@@ -279,7 +280,7 @@ header .social i.active
 }
 .services .srv h2 {
   font-size: 2rem;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
 }
 .services .srv p {
   font-size: 1rem;
@@ -291,6 +292,36 @@ header .social i.active
   color: var(--primary);
 }
 /* end section services  */
+/* start section features */
+.features {
+  background-color: var(--light);
+  padding-top: 100px;
+  padding-bottom: 100px;
+  text-align: center;
+}
+.features .feature {
+  display: flex;
+}
+@media (max-width: 767px) {
+  .features .feature {
+      flex-direction: column;
+  }
+}
+.features h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+.features .feature i {
+  font-size: 30px;
+  margin-bottom: 15px;
+  color: var(--primary);
+}
+@media (max-width: 767px) {
+  .features .feature .card {
+    margin-bottom: 20px;
+  }
+}
+/* end section features */
 /* start section about  */
 .about {
   background-color: var(--light);
@@ -361,13 +392,11 @@ header .social i.active
   background-color: var(--light);
   padding: 20px;
   border-radius: 3px;
-  box-shadow: 3px 3px 3px #ccc;
   transition: transform .3s, box-shadow .3s;
   color: var(--dark);
 }
 .testimonials .box:hover {
   transform: translateY(-5px);
-  box-shadow: 6px 6px 10px #bbb;
   cursor: pointer;
 }
 .testimonials .box .client {
@@ -393,21 +422,69 @@ header .social i.active
 }
 /* end section testimonials */
 /* start section contact  */
-.cta {
-  background-color: var(--light);
+.contact {
+  background-color: var(--dark);
   padding-top: 100px;
   padding-bottom: 100px;
   text-align: center;
-  color: var(--dark);
+  color: var(--light);
 }
-
-.cta h2 {
+.contact h2 {
   font-size: 2rem;
 }
-.cta p {
+.contact p {
   font-size: 1rem;
   line-height: 1.5;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+}
+.contact .btn {
+  background-color: var(--light);
+  color: var(--dark);
+  margin-bottom: 15px;
+}
+.contact .box {
+  padding: 10px;
+  background-color: var(--light);
+  max-width: 600px;
+  margin: auto;
+  border-radius: 5px;
+}
+.contact .contact-form {
+  margin-bottom: 20px;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius:4px;
+  border: 1px solid #ddd;
+  font-family: inherit;
+  font-size: 14px;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+.contact-form textarea {
+  resize: vertical;
+  min-height: 170px;
+}
+.error-msg {
+  color: #dc2626;
+  font-size: 12px;
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.form-success {
+  margin-bottom: 15px;
+  color: #16a34a;
+  font-weight: 600;
+}
+.contact .box .btn {
+  background-color: var(--dark);
+  color: var(--light);
 }
 /* end section contact  */
 /* start footer  */
