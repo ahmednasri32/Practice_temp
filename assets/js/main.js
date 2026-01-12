@@ -4,6 +4,9 @@ const nav = document.querySelector(".nav-links");
 const sections = document.querySelectorAll("section");
 const form = document.querySelector(".contact-form");
 const successMsg = document.querySelector(".form-success");
+const themeToggle = document.querySelector(".theme-toggle");
+const body = document.body;
+const icon = themeToggle.querySelector("i");
 
 toggleMenu.addEventListener("click", (e) => {
   e.stopPropagation(); 
@@ -78,4 +81,21 @@ form.addEventListener("submit", (e) => {
     successMsg.textContent = "Message sent successfully!";
     form.reset();
   }
+});
+
+/* تحميل الوضع المحفوظ */
+if (localStorage.getItem("theme") === "dark") {
+  body.classList.add("dark");
+  icon.classList.replace("fa-moon", "fa-sun");
+}
+
+/* تبديل الوضع */
+themeToggle.addEventListener("click", () => {
+  body.classList.toggle("dark");
+
+  const isDark = body.classList.contains("dark");
+  icon.classList.toggle("fa-sun", isDark);
+  icon.classList.toggle("fa-moon", !isDark);
+
+  localStorage.setItem("theme", "light");
 });
