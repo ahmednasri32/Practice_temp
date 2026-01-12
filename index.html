@@ -17,7 +17,9 @@
       <div class="container">
         <div class="logo">Logo designer</div>
         <nav>
-          <i class="fas fa-bars toggle-menu"></i>
+          <button class="toggle-menu" aria-label="Open Menu">
+            <i class="fas fa-bars"></i>
+          </button>
           <ul class="nav-links">
             <li><a href="#home" class="active">Home</a></li>
             <li><a href="#services">Services</a></li>
@@ -25,7 +27,7 @@
             <li><a href="#testimonials">testimonials</a></li>
             <li><a href="#about">About</a></li>
           </ul>
-          <button class="theme-toggle" aria-label="Toggle Dark Mode">
+          <button class="theme-toggle" aria-label="Toggle Dark Mode" aria-pressed="false">
             <i class="fa-solid fa-moon"></i>
           </button>
         </nav>
@@ -45,17 +47,17 @@
   <!-- start services -->
   <section id="services" class="services">
       <div class="container">
-        <div class="srv">
+        <div class="srv reveal delay-1">
           <h2>Web Design</h2>
           <i class="fa-solid fa-check"></i>
           <p>Web Design – Get a beautiful website that works perfectly on all devices.</p>
         </div>
-        <div class="srv">
+        <div class="srv reveal delay-2">
           <h2>Web Development</h2>
           <i class="fa-solid fa-code"></i>
           <p>Clean, scalable, and optimized code using modern web standards.</p>
         </div>
-        <div class="srv">
+        <div class="srv reveal delay-3">
           <h2>SEO Optimization</h2>
           <i class="fa-solid fa-hexagon-nodes"></i>
           <p>Improve your visibility and rank higher on search engines.</p>
@@ -69,7 +71,7 @@
           <h2>Why Choose Us</h2>
 
           <div class="feature">
-            <div class="card">
+            <div class="card reveal delay-1">
               <i class="fa-solid fa-bolt"></i>
               <h3>Fast & optimized</h3>
               <p>
@@ -77,7 +79,7 @@
                 and deliver smooth user experiences.
               </p>
             </div> 
-            <div class="card">
+            <div class="card reveal delay-2">
               <i class="fa-solid fa-mobile-screen-button"></i>
               <h3>Fully Responsive</h3>
               <p>
@@ -85,7 +87,7 @@
                 from desktops to smartphones.
               </p>
             </div>
-            <div class="card">
+            <div class="card reveal delay-3">
               <i class="fa-solid fa-code"></i>
               <h3>Clean Code</h3>
               <p>
@@ -93,7 +95,7 @@
                 following modern web standards.
               </p>
             </div>
-            <div class="card">
+            <div class="card reveal delay-4">
               <i class="fa-solid fa-chart-line"></i>
               <h3>SEO Friendly</h3>
               <p>
@@ -109,11 +111,14 @@
   <section id="testimonials" class="testimonials">
     <div class="container">
       <h2>What Our Clients Say</h2>
-      <div class="card">
+      <div class="card reveal">
         <div class="box">
           <div class="client">
             <div class="profile">
-              <img src="assets/image/profile_1.jpg" alt="">
+              <img
+               src="assets/image/profile_1.jpg"
+               loading="lazy"
+               alt="profile">
               <span>Alice</span>
             </div>
             <span>
@@ -128,7 +133,10 @@
         <div class="box">
           <div class="client">
             <div class="profile">
-              <img src="assets/image/profile_2.jpg" alt="">
+              <img
+               src="assets/image/profile_2.jpg"
+               loading="lazy"
+               alt="profile">
               <span>Bob</span>
             </div>
             <span>
@@ -143,7 +151,10 @@
         <div class="box">
           <div class="client">
             <div class="profile">
-              <img src="assets/image/profile_3.jpg" alt="">
+              <img 
+              src="assets/image/profile_3.jpg"
+              loading="lazy"
+              alt="">
               <span>Carol</span>
             </div>
             <span>
@@ -162,7 +173,7 @@
     <!-- start about -->
     <section id="about" class="about">
       <div class="container">
-        <div class="text">
+        <div class="text reveal">
           <h3>About Us</h3>
           <p>
             MyBrand is a creative studio specialized in designing and developing modern websites.
@@ -170,8 +181,11 @@
           </p>
           <button class="btn btn--text">Learn More..</button>
         </div>
-        <div class="image">
-          <img src="assets/image/about.jpg" alt="">
+        <div class="image reveal">
+          <img
+           src="assets/image/about.jpg"
+           loading="lazy"
+           alt="about us">
         </div>
       </div>
     </section>
@@ -180,9 +194,9 @@
     <section id="contact" class="contact">
       <div class="container">
         <h2>Ready to Start Your Project?</h2>
-        <p>Lets build something amazing together.</p>
+        <p>Let’s turn your idea into a powerful online presence.</p>
 
-        <div class="box">
+        <div class="box reveal">
           <h3>Contact Us</h3>
           <p>Tell us about your project and we’ll get back to you shortly.</p>
           
@@ -191,20 +205,16 @@
               <input type="text" name="name" placeholder="Your Name" />
               <small class="error-msg"></small>
             </div>
-          
-          <form action="" class="contact-form" novalidate>
             <div class="form-group">
               <input type="email" name="email" placeholder="Your Email" />
               <small class="error-msg"></small>
           </div>
-          
-          <form action="" class="contact-form" novalidate>
-            <div class="form-group">
-              <textarea type="message" rows="5" placeholder="Your Message"></textarea>
-              <small class="error-msg"></small>
-            </div>
-            <button type="submit" class="btn">Send Message</button>
-            <p class="form-success"></p>
+          <div class="form-group">
+            <textarea name="message" rows="5" placeholder="Your Message"></textarea>
+            <small class="error-msg"></small>
+          </div>
+          <button type="submit" class="btn">Send Message</button>
+          <p class="form-success"></p>
           </form>
         </div>
       </div>
@@ -216,13 +226,19 @@
       <span>&copy; 2026 MyBrand. All Rights Reserved.</span>
       <div class="links">
         <span>Contact Me :</span>
-        <a href=""><i class="fa-brands fa-facebook"></i></a>
-        <a href=""><i class="fa-brands fa-github"></i></a>
-        <a href=""><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#"><i class="fa-brands fa-github"></i></a>
+        <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
       </div>
     </div>
   </footer>
   <!-- end footer  -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function () {
+      emailjs.init("YOUR_PUBLIC_KEY");
+    })();
+  </script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>

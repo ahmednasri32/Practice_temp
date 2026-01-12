@@ -1,101 +1,127 @@
-const navLinks = document.querySelectorAll("header ul li a");
-const toggleMenu = document.querySelector(".toggle-menu");
-const nav = document.querySelector(".nav-links");
-const sections = document.querySelectorAll("section");
-const form = document.querySelector(".contact-form");
-const successMsg = document.querySelector(".form-success");
-const themeToggle = document.querySelector(".theme-toggle");
-const body = document.body;
-const icon = themeToggle.querySelector("i");
+document.addEventListener("DOMContentLoaded", () => {
 
-toggleMenu.addEventListener("click", (e) => {
-  e.stopPropagation(); 
-  nav.classList.toggle("open");
-});
+  /* =====================
+     Elements
+  ===================== */
+  const navLinks = document.querySelectorAll("header ul li a");
+  const toggleMenu = document.querySelector(".toggle-menu");
+  const nav = document.querySelector(".nav-links");
+  const sections = document.querySelectorAll("section");
+  const form = document.querySelector(".contact-form");
+  const successMsg = document.querySelector(".form-success");
+  const themeToggle = document.querySelector(".theme-toggle");
+  const body = document.body;
+  const icon = themeToggle.querySelector("i");
+  const revealElements = document.querySelectorAll(".reveal");
 
-document.addEventListener("click", (e) => {
-  if (
-    !e.target.closest(".nav-links") &&
-    !e.target.closest(".toggle-menu")
-    ) {
-    nav.classList.remove("open");
-  }
-});
-navLinks.forEach(link => {
-  link.addEventListener("click", () => {
-    nav.classList.remove("open");
+  /* =====================
+     Mobile Menu
+  ===================== */
+  toggleMenu.addEventListener("click", (e) => {
+    e.stopPropagation();
+    nav.classList.toggle("open");
   });
-});
-/*=====================
-active Link on Scroll
-======================*/
-const observer = new IntersectionObserver(
-  (entries) => {
+
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".nav-links") && !e.target.closest(".toggle-menu")) {
+      nav.classList.remove("open");
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.addEventListener("click", () => nav.classList.remove("open"));
+  });
+
+  /* =====================
+     Active Link on Scroll
+  ===================== */
+  const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const id = entry.target.getAttribute("id");
-
+        const id = entry.target.id;
         navLinks.forEach(link => {
-          link.classList.remove("active");
-          if (link.getAttribute("href") === `#${id}`) {
-            link.classList.add("active");
-          }
+          link.classList.toggle(
+            "active",
+            link.getAttribute("href") === `#${id}`
+          );
         });
       }
     });
-  },
-  {
-    root: null,
-    threshold: 0.6, // 60% من القسم ظاهر
-  }
-);
-sections.forEach(section => observer.observe(section));
+  }, { threshold: 0.6 });
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
+  sections.forEach(section => observer.observe(section));
 
-  let isValid = true;
-  successMsg.textContent = "";
+  /* =====================
+     Contact Form
+  ===================== */
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-  const fields = form.querySelectorAll("input, textarea");
+    let isValid = true;
+    successMsg.textContent = "";
 
-  fields.forEach(field => {
-    const error = field.nextElementSibling;
+    const fields = form.querySelectorAll("input, textarea");
 
-    if (!field.value.trim()) {
-      error.textContent = "this field is required";
-      isValid = false;
-    } else {
-      error.textContent = "";
-    }
-    if (field.type === "email" && field.value) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(field.value)) {
-        error.textContent = "Please enter a valid email";
-        isValid = false
+    fields.forEach(field => {
+      const error = field.nextElementSibling;
+      if (!field.value.trim()) {
+        error.textContent = "This field is required";
+        isValid = false;
+      } else {
+        error.textContent = "";
       }
-    }
+    });
+
+    if (!isValid) return;
+
+    emailjs.sendForm(
+      "YOUR_SERVICE_ID",
+      "YOUR_TEMPLATE_ID",
+      form
+    )
+    .then(() => {
+      successMsg.textContent = "Message sent successfully!";
+      successMsg.className = "form-success error";
+      form.reset();
+    })
+    .catch(() => {
+      successMsg.textContent = "Something went wrong. Try again.";
+      successMsg.className = "form-success error";
+    });
   });
 
-  if (isValid) {
-    successMsg.textContent = "Message sent successfully!";
-    form.reset();
+  /* =====================
+     Dark Mode
+  ===================== */
+  const savedTheme = localStorage.getItem("theme");
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  setTheme(savedTheme ? savedTheme === "dark" : prefersDark);
+
+  themeToggle.addEventListener("click", () => {
+    setTheme(!body.classList.contains("dark"));
+  });
+
+  function setTheme(isDark) {
+    body.classList.toggle("dark", isDark);
+    icon.classList.toggle("fa-sun", isDark);
+    icon.classList.toggle("fa-moon", !isDark);
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+    themeToggle.setAttribute("aria-pressed", isDark);
   }
-});
 
-/* تحميل الوضع المحفوظ */
-if (localStorage.getItem("theme") === "dark") {
-  body.classList.add("dark");
-  icon.classList.replace("fa-moon", "fa-sun");
-}
+  /* =====================
+     Reveal Animation
+  ===================== */
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
 
-/* تبديل الوضع */
-themeToggle.addEventListener("click", () => {
-  body.classList.toggle("dark");
+  revealElements.forEach(el => revealObserver.observe(el));
 
-  const isDark = body.classList.contains("dark");
-  icon.classList.toggle("fa-sun", isDark);
-  icon.classList.toggle("fa-moon", !isDark);
-
-  localStorage.setItem("theme", "light");
 });
