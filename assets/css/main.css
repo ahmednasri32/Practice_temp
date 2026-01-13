@@ -215,7 +215,7 @@ header ul li a {
   }
   header ul.open {
     display: flex;
-    max-height: 300px;
+    max-height: 350px;
     opacity: 1;
     pointer-events: auto;
   }
