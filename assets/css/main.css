@@ -527,15 +527,22 @@ header .social i.active
   margin-bottom: 5px;
 }
 .form-success {
-  margin-bottom: 15px;
+  margin-top: 10px;
   font-weight: 600;
+  font-size: 0.9rem;
+  transition: opacity 0.5s ease, max-height 0.5s ease;
+  margin-top: 0.5rem;
+  overflow: hidden;
+  opacity: 0;
 }
-.form-success.success {
-  color: #22c55e;
+.form-success.show {
+  opacity: 1;
+  max-height: 100px;
 }
-.form-success.error {
-  color: #ef4444;
-}
+/* message */
+.form-success.sending {color: #3498db;}
+.form-success.success {color: #22c55e;}
+.form-success.error {color: #ef4444;}
 .contact .box .contact-form .btn {
   background-color: var(--dark);
   color: var(--gray);

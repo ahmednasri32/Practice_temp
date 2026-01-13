@@ -17,12 +17,12 @@ document.addEventListener("DOMContentLoaded", () => {
   /* =====================
      Mobile Menu
   ===================== */
-  toggleMenu.addEventListener("click", (e) => {
+  toggleMenu.addEventListener("click", e => {
     e.stopPropagation();
     nav.classList.toggle("open");
   });
 
-  document.addEventListener("click", (e) => {
+  document.addEventListener("click", e => {
     if (!e.target.closest(".nav-links") && !e.target.closest(".toggle-menu")) {
       nav.classList.remove("open");
     }
@@ -40,10 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (entry.isIntersecting) {
         const id = entry.target.id;
         navLinks.forEach(link => {
-          link.classList.toggle(
-            "active",
-            link.getAttribute("href") === `#${id}`
-          );
+          link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
         });
       }
     });
@@ -52,41 +49,59 @@ document.addEventListener("DOMContentLoaded", () => {
   sections.forEach(section => observer.observe(section));
 
   /* =====================
-     Contact Form
+     Contact Form (FormSubmit)
   ===================== */
-  form.addEventListener("submit", (e) => {
+  function showMessage(text, type) {
+    successMsg.textContent = text;
+    successMsg.className = `form-success ${type} show`;
+
+    // اختفاء الرسالة تلقائيًا بعد 5 ثواني
+    setTimeout(() => {
+      successMsg.classList.remove("show");
+      // إعادة تعيين النص بعد الاختفاء
+      successMsg.textContent = "";
+    }, 5000);
+  }
+
+  form.addEventListener("submit", e => {
     e.preventDefault();
 
-    let isValid = true;
-    successMsg.textContent = "";
+    showMessage("Sending...", "sending");
 
-    const fields = form.querySelectorAll("input, textarea");
-
-    fields.forEach(field => {
+    let valid = true;
+    form.querySelectorAll("input, textarea").forEach(field => {
       const error = field.nextElementSibling;
       if (!field.value.trim()) {
         error.textContent = "This field is required";
-        isValid = false;
+        valid = false;
       } else {
         error.textContent = "";
       }
     });
 
-    if (!isValid) return;
+    if (!valid) {
+      successMsg.textContent = "";
+      successMsg.className = "form-success";
+      return;
+    }
 
-    emailjs.sendForm(
-      "YOUR_SERVICE_ID",
-      "YOUR_TEMPLATE_ID",
-      form
-    )
-    .then(() => {
-      successMsg.textContent = "Message sent successfully!";
-      successMsg.className = "form-success error";
+    const formData = new FormData(form);
+    fetch(form.action, {
+      method: "POST",
+      body: formData,
+      headers: { "Accept": "application/json" }
+    })
+    .then(res => {
+      if (res.ok) return res.json();
+      else throw new Error("Network response was not ok");
+    })
+    .then(data => {
+      showMessage("Message sent successfully!", "success");
       form.reset();
     })
-    .catch(() => {
-      successMsg.textContent = "Something went wrong. Try again.";
-      successMsg.className = "form-success error";
+    .catch(err => {
+      showMessage("Something went wrong. Try again.", "error");
+      console.error(err);
     });
   });
 
@@ -111,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* =====================
-     Reveal Animation
+     Reveal Animations
   ===================== */
   const revealObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
