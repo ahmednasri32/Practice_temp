@@ -63,6 +63,48 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 5000);
   }
 
+  // تحقق فوري أثناء الكتابة
+form.querySelectorAll("input, textarea").forEach(field => {
+  field.addEventListener("input", () => {
+    const error = field.parentElement.querySelector(".error-msg");
+    const checkIcon = field.parentElement.querySelector(".valid-icon");
+    const value = field.value.trim();
+
+    // 🔴 الحقل فارغ
+    if (!value) {
+      error.textContent = "This field is required";
+      field.style.borderColor = "#dc2626";
+
+      if (checkIcon) checkIcon.style.display = "none";
+      return;
+    }
+
+    // ✉️ حقل الإيميل
+    if (field.type === "email") {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailRegex.test(value)) {
+        error.textContent = "Please enter a valid email address";
+        field.style.borderColor = "#dc2626";
+
+        if (checkIcon) checkIcon.style.display = "none";
+        return;
+      }
+    }
+
+    // ✅ صحيح (لكل الحقول)
+    error.textContent = "";
+    field.style.borderColor = "#22c55e";
+
+    if (checkIcon) {
+      checkIcon.style.display = "block";
+      checkIcon.style.animation = "none";
+      checkIcon.offsetHeight; // force reflow
+      checkIcon.style.animation = "pop 0.35s ease forwards";
+    }
+  });
+});
+
   form.addEventListener("submit", e => {
     e.preventDefault();
 
@@ -70,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let valid = true;
     form.querySelectorAll("input, textarea").forEach(field => {
-      const error = field.nextElementSibling;
+      const error = field.parentElement.querySelector(".error-msg");
       if (!field.value.trim()) {
         error.textContent = "This field is required";
         valid = false;
@@ -98,6 +140,18 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(data => {
       showMessage("Message sent successfully!", "success");
       form.reset();
+      
+      // 🔄 Reset validation UI
+      form.querySelectorAll("input, textarea").forEach(field => {
+        field.style.borderColor = "#ddd";
+
+        const error = field.parentElement.querySelector(".error-msg");
+        const checkIcon = field.parentElement.querySelector(".valid-icon");
+
+        if (error) error.textContent = "";
+        if (checkIcon) checkIcon.style.display = "none";
+      });
+
     })
     .catch(err => {
       showMessage("Something went wrong. Try again.", "error");
