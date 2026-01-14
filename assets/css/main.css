@@ -299,6 +299,9 @@ header .social i.active
   color: #e5e7eb;
   margin-bottom: 10px;
 }
+.hero__content button {
+  color: white;
+}
 /* Mobile Optimization */
 @media (max-width: 767px) {
   .hero {
