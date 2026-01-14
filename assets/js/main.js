@@ -13,6 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const body = document.body;
   const icon = themeToggle.querySelector("i");
   const revealElements = document.querySelectorAll(".reveal");
+  const track = document.querySelector(".testimonial-track");
+  const slides = document.querySelectorAll(".testimonial-card");
+  const nextBtn = document.querySelector(".next");
+  const prevBtn = document.querySelector(".prev");
 
   /* =====================
      Mobile Menu
@@ -140,7 +144,7 @@ form.querySelectorAll("input, textarea").forEach(field => {
     .then(data => {
       showMessage("Message sent successfully!", "success");
       form.reset();
-      
+
       // 🔄 Reset validation UI
       form.querySelectorAll("input, textarea").forEach(field => {
         field.style.borderColor = "#ddd";
@@ -193,4 +197,111 @@ form.querySelectorAll("input, textarea").forEach(field => {
 
   revealElements.forEach(el => revealObserver.observe(el));
 
+  /* =====================
+    Testimonials Slider (Stable)
+  ===================== */
+  if (track && slides.length > 0) {
+
+    let index = 1;
+    let isMoving = false;
+    const intervalTime = 5000;
+
+    const slidesArray = Array.from(slides);
+
+    /* Clone first & last */
+    const firstClone = slidesArray[0].cloneNode(true);
+    const lastClone  = slidesArray[slidesArray.length - 1].cloneNode(true);
+
+    track.appendChild(firstClone);
+    track.insertBefore(lastClone, slidesArray[0]);
+
+    const allSlides = document.querySelectorAll(".testimonial-card");
+
+    /* Initial position */
+    track.style.transition = "none";
+    track.style.transform = "translateX(-100%)";
+
+    function moveSlider() {
+      isMoving = true;
+      track.style.transition = "transform 0.6s ease";
+      track.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    /* Next */
+    nextBtn.addEventListener("click", () => {
+      if (isMoving) return;
+      index++;
+      moveSlider();
+      resetAutoSlide();
+    });
+
+    /* Prev */
+    prevBtn.addEventListener("click", () => {
+      if (isMoving) return;
+      index--;
+      moveSlider();
+      resetAutoSlide();
+    });
+
+    /* Infinite fix */
+    track.addEventListener("transitionend", () => {
+      isMoving = false;
+
+      if (allSlides[index] === firstClone) {
+        track.style.transition = "none";
+        index = 1;
+        track.style.transform = "translateX(-100%)";
+      }
+
+      if (allSlides[index] === lastClone) {
+        track.style.transition = "none";
+        index = allSlides.length - 2;
+        track.style.transform = `translateX(-${index * 100}%)`;
+      }
+    });
+
+    /* Auto Slide */
+    let autoSlide = setInterval(() => {
+      index++;
+      moveSlider();
+    }, intervalTime);
+
+    function resetAutoSlide() {
+      clearInterval(autoSlide);
+      autoSlide = setInterval(() => {
+        index++;
+        moveSlider();
+      }, intervalTime);
+    }
+    /* =====================
+        Swipe Support (Mobile)
+      =====================*/
+      let startX = 0;
+      let endX = 0;
+      const swipeThrehold = 50; // مسافة السحب المطلوبة
+      track.addEventListener("touchstart", e => {
+        startX = e.touches[0].clientX;
+      });
+
+      track.addEventListener("touchmove", e => {
+        endX = e.touches[0].clientX;
+      });
+      track.addEventListener("touchend", () => {
+        const diff = startX - endX;
+
+        if (Math.abs(diff) > swipeThrehold && !isMoving) {
+          if (diff > 0) {
+            // Swipe Left → Next
+            index++;
+          } else {
+            // Swipe Right → Prev
+            index--;
+          }
+          moveSlider();
+          resetAutoSlide();
+        }
+
+        startX = endX = 0;
+      });
+  }
 });
