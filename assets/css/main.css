@@ -653,7 +653,17 @@ footer .container a:hover {
 /* Large Phones/tablets */
 @media (max-width: 576px) {  }
 /* Tablets (Portrait) */
-@media (min-width: 767px) {  }
+@media (max-width: 767px) { 
+  header,
+  .hero,
+  .services,
+  .projects,
+  .testimonials,
+  .about,
+  .contact {
+    padding-top:25px;
+  }
+ }
 /* Desktops/Laptops */
 @media (min-width: 992px) {  }
 /* Large Desktops */
