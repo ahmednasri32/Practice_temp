@@ -3,6 +3,7 @@
   --text: #0f172a;
   --card: #f8fafc;
   --primary: #2563eb;
+  --secondary: #1c459e;
   --dark: #0f172a;
   --gray: #e6e6e6;
   --btn-space:10px;
@@ -73,16 +74,9 @@ ul,li {
   border-radius: 3px;
   cursor: pointer;
   font-weight: 600;
-  color: var(--card);
+  color: white;
   transition: .3s;
-}
-.btn--primary {
   background-color: var(--primary);
-  color: var(--card);
-}
-.btn--text {
-  background-color: var(--text);
-  color: var(--card);
 }
 .btn--primary:nth-of-type(2) {
   margin-left: 5px;
@@ -353,39 +347,8 @@ header .social i.active
   color: var(--primary);
 }
 /* end section services  */
-/* start section features */
-.features {
-  background-color: var(--card);
-  padding-top: 100px;
-  padding-bottom: 100px;
-  text-align: center;
-}
-.features .feature {
-  display: flex;
-}
-@media (max-width: 767px) {
-  .features .feature {
-      flex-direction: column;
-  }
-}
-.features h2 {
-  font-size: 2rem;
-  margin-bottom: 15px;
-}
-.features .feature i {
-  font-size: 30px;
-  margin-bottom: 15px;
-  color: var(--primary);
-}
-@media (max-width: 767px) {
-  .features .feature .card {
-    margin-bottom: 20px;
-  }
-}
-/* end section features */
 /* start section projects */
 .projects {
-  padding-top: 100px;
   padding-bottom: 100px;
   color: var(--text);
 }
@@ -410,14 +373,15 @@ header .social i.active
   display: inline-block;
   margin: 5px;
   padding: 5px 10px;
-  background-color: #ffcd00;
-  color: #000;
+  background-color: var(--primary);
+  color: white;
   text-decoration: none;
   border-radius: 5px;
   font-weight: bold;
+  transition: 0.3s ease;
 }
-.project-links a:hover {
-  background-color: #ffc107;
+.project-link a:hover {
+  background-color: var(--secondary);
 }
 /* end section projects */
 /* start section about  */
@@ -529,7 +493,6 @@ header .social i.active
   height: 50px;
   border-radius: 50%;
   display: block;
-  object-fit: cover;
 }
 .testimonials .profile .span {
   font-weight: 700;
@@ -643,15 +606,11 @@ header .social i.active
 .form-success.sending {color: #3498db;}
 .form-success.success {color: #22c55e;}
 .form-success.error {color: #ef4444;}
-.contact .box .contact-form .btn {
-  background-color: var(--dark);
-  color: var(--gray);
-}
 /* end section contact  */
 /* start footer  */
 footer {
-  background-color: var(--primary);
-  color: var(--card);
+  background-color: var(--card);
+  color: var(--text);
 }
 footer .container {
   padding-top: 30px;
@@ -679,7 +638,6 @@ footer .links {
 }
 footer .links span {
   font-size: 14px;
-  color: var(--card);
   display: block;
 }
 footer .links a {
@@ -687,7 +645,7 @@ footer .links a {
   transition: 0.3s;
 }
 footer .container a:hover {
-  color: var(--dark);
+  color: var(--primary);
 }
 /* end footer  */
 
