@@ -360,7 +360,6 @@ header .social i.active
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 15px;
-  margin-bottom: 20px;
   text-align: center;
   background-color: var(--card);
 }
@@ -661,7 +660,8 @@ footer .container a:hover {
   .testimonials,
   .about,
   .contact {
-    padding-top:25px;
+    padding-top:20px;
+    padding-bottom: 20px;
   }
  }
 /* Desktops/Laptops */
