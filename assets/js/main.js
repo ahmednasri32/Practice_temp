@@ -33,22 +33,45 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   navLinks.forEach(link => {
-    link.addEventListener("click", () => nav.classList.remove("open"));
+  link.addEventListener("click", () => {
+    isClickScrolling = true;
+
+    navLinks.forEach(l => l.classList.remove("active"));
+    link.classList.add("active");
+
+    nav.classList.remove("open");
+
+    setTimeout(() => {
+      isClickScrolling = false;
+    }, 600);
   });
+});
+
 
   /* =====================
      Active Link on Scroll
   ===================== */
+  let isClickScroling = false;
+
   const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.id;
-        navLinks.forEach(link => {
-          link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
-        });
-      }
-    });
-  }, { threshold: 0.6 });
+  if (isClickScrolling) return;
+
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      navLinks.forEach(link => {
+        link.classList.toggle(
+          "active",
+          link.getAttribute("href") === `#${id}`
+        );
+      });
+    }
+  });
+}, {
+  rootMargin: "-80px 0px -40% 0px",
+  threshold: 0
+});
+
 
   sections.forEach(section => observer.observe(section));
 
