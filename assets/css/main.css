@@ -370,6 +370,11 @@ header .social i.active
   text-align: center;
   background-color: var(--card);
 }
+@media (max-width: 767px) {
+  .projects .project-card {
+    margin-bottom: 10px;
+  }
+}
 .projects .project-card img {
   max-width: 100%;
   border-radius: 5px;
