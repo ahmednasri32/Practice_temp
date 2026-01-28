@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* =====================
      Active Link on Scroll
   ===================== */
-  let isClickScroling = false;
+  let isClickScrolling = false;
 
   const observer = new IntersectionObserver(entries => {
   if (isClickScrolling) return;
