@@ -33,7 +33,7 @@ body {
   background-color: var(--bg);
   color: var(--text);
   line-height: 1.7;
-  padding-top: 88.594px;
+  padding-top: 80px;
 }
 body,
 .card,
@@ -254,20 +254,16 @@ header .social i.active
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image:image-set(
-  url("../image/blurry-gradient-haikei.svg") type("image/svg")
-  );
+  background-image: url("../image/blurry-gradient-haikei.svg");
   background-size: cover;
   background-position: center;
   overflow: hidden;
 }
 @media (max-width: 767px) {
   .hero {
-    min-height: 50vh;
-    text-align: center;
+    min-height: calc(50vh - 88.594px);
   }
 }
-/* Overlay */
 .hero::before {
   content: "";
   position: absolute;
@@ -310,7 +306,9 @@ header .social i.active
   font-size: clamp(0.9rem, 2vw, 1rem);
   line-height: 1;
   color: #e5e7eb;
-  margin-bottom: 20px;
+  max-width: 300px;
+  margin: auto;
+  margin-bottom: 20px
 }
 .hero__content button {
   color: white;
