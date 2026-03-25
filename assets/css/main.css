@@ -2,8 +2,8 @@
   --bg:#ffffff;
   --text: #0f172a;
   --card: #f8fafc;
-  --primary: #6600FF;
-  --secondary: #1c459e;
+  --primary: #0077ff;
+  --secondary: #000000;
   --dark: #0f172a;
   --gray: #e6e6e6;
   --btn-space:10px;
@@ -148,6 +148,7 @@ header nav .toggle-menu {
     display: block;
     color: var(--dark);
     font-size: 22px;
+    cursor: pointer;
   }
 }
 header .theme-toggle {
@@ -190,6 +191,7 @@ header ul {
     opacity: 0;
     overflow: hidden;
     transition: max-height 0.4s ease, opacity 0.3s ease;
+    padding-top: 10px;
   }
 }
 header ul li a {
@@ -205,7 +207,7 @@ header ul li a {
   header ul li a {
     padding-left: 10px;
     font-size: 16px;
-    padding: 15px 10px;
+    padding: 10px 10px;
     color: var(--text);
   }
   header ul li a:hover {
@@ -269,7 +271,7 @@ header .social i.active
   position: absolute;
   inset: 0;
   background: linear-gradient(45deg,
-      rgba(0, 0, 0, 0.9) 20%,
+      rgba(252, 194, 5, 0.9) 20%,
       rgba(0, 0, 0, 0.2));
   z-index: 1;
 }
@@ -340,9 +342,15 @@ header .social i.active
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+  transition: all 0.3s ease-out;
 }
 .services .srv:hover {
-  transform: translateY(-10px);
+  background-color: var(--primary);
+  color: var(--gray);
+}
+.services .srv:hover i {
+  color: var(--gray);
+  transform: scale(0.8);
 }
 .services .srv h2 {
   font-size: 2rem;
@@ -356,6 +364,7 @@ header .social i.active
   font-size: 50px;
   margin-bottom: 15px;
   color: var(--primary);
+  transition: transform 0.2s ease-out;
 }
 /* end section services  */
 /* start section projects */
